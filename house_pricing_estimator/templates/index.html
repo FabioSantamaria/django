@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<h1>Price of Houses</h1>
+
+<table class="table" border="1">
+{% for x in myHouses %}
+<tr>
+<th>id</th>
+<th>floor number</th>
+<th>year of construction</th>
+<th>squares meters</th>
+<th>number of rooms</th>
+<th>number of baths</th>
+<th>delete</th>
+</tr>
+<tr>
+<td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+<td>{{ x.floor_number }}</td>
+<td>{{ x.year_construction }}</td>
+<td>{{ x.square_meters }}</td>
+<td>{{ x.rooms_number }}</td>
+<td>{{ x.baths_number }}</td>
+<td><a href="delete/{{ x.id }}">delete</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<p>
+<a href="add/">Add House</a>
+</p>
+
+{% endblock container %}

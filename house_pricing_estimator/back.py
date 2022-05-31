@@ -1,9 +1,5 @@
-import matplotlib.pyplot as plt
+
 import numpy as np
-from sklearn.linear_model import LinearRegression
-
-
-
 
 def linear_model(
 		floor_number, 
@@ -12,4 +8,14 @@ def linear_model(
 		rooms_number, 
 		baths_number
 		):
-	return 0.5 * floor_number + 0.5 * year_construction + 0.5 * square_meters + 0.5 * rooms_number + 0.5 * baths_number
+
+	floor_coef = 0
+	year_coef = 0
+	rooms_coef = -0.067523
+	baths_coef = 0.060102
+
+	y = floor_coef * floor_number + year_coef * year_construction + rooms_coef * rooms_number + baths_coef * baths_number
+
+	price = square_meters * np.exp(y)
+
+	return price

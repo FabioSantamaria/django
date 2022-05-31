@@ -24,18 +24,14 @@ from django.urls import include, path
 from house_pricing_estimator import views
 
 urlpatterns = [
-    #path('', home_view, name='home'),
-    #path('store/', BookListView),
-    #path('thanks/', thanks_view, name='thanks'),
-    #path('contact/', contact_form_view, name='contact'),
-    #path('articles/', manage_articles, name='articles'),
-    #path('house/', house_form_view, name='house'),
     path('', views.index, name='index'),
     path('add/', views.add, name='add'),
     path('add/addrecord/', views.addrecord, name='addrecord'),
     path('delete/<int:id>', views.delete, name='delete'),
     path('update/<int:id>', views.update, name='update'),
     path('update/updaterecord/<int:id>', views.updaterecord, name='updaterecord'),
+    path('predictions/<int:id>', views.predictions, name='predictions'),
+    path('predictions/updatepredictions/<int:id>', views.updatepredictions, name='updatepredictions'),
 
     path('admin/', admin.site.urls),
 ]

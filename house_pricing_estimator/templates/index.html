@@ -14,6 +14,7 @@
 <th>number of rooms</th>
 <th>number of baths</th>
 <th>delete</th>
+<th>Estimated Price</th>
 </tr>
 <tr>
 <td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
@@ -23,6 +24,7 @@
 <td>{{ x.rooms_number }}</td>
 <td>{{ x.baths_number }}</td>
 <td><a href="delete/{{ x.id }}">delete</a></td>
+<td><a href="predictions/{{ x.id }}">predictions</a></td>
 </tr>
 {% endfor %}
 </table>

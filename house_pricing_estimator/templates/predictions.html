@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<h1>Price predictions</h1>
+
+<form action="updatepredictions/{{ myHouse.id }}" method="post">{% csrf_token %}
+
+<table class="table" border="1">
+<tr>
+	<th>floor number</th>
+	<th>year of construction</th>
+	<th>squares meters</th>
+	<th>number of rooms</th>
+	<th>number of baths</th>
+</tr>
+
+<tr>
+	<td><input name="floor_number" type="number" value="{{ myHouse.floor_number }}" readonly></td>
+	<td><input name="year_construction" type="number" value="{{ myHouse.year_construction }}" readonly></td>
+	<td><input name="square_meters" type="float" value="{{ myHouse.square_meters }}" readonly></td>
+	<td><input name="rooms_number" type="number" value="{{ myHouse.rooms_number }}" readonly></td>
+	<td><input name="baths_number" type="number" value="{{ myHouse.baths_number }}" readonly></td>
+</tr>
+
+</table>
+
+<table class="table" border="1">
+<tr>
+	<th>Model Type</th>
+	<th>Estimated Price</th>
+</tr>
+
+{% for comment in myHouse.predictions_set.all %}
+<tr>
+<td>{{comment.model_name}}</td>
+<td>{{comment.price}}</td>
+</tr>
+{% endfor %}
+
+
+</table>
+
+
+
+
+<br><br>
+<input type="submit" value="Compute">
+</form>
+
+
+
+{% endblock container %}

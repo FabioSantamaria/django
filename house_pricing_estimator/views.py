@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-from .models import Houses
+from .models import Houses, Predictions
 from .back import linear_model
 
 def index(request):
@@ -25,16 +25,6 @@ def addrecord(request):
 	square_meters = float(request.POST['square_meters'])
 	rooms_number = int(request.POST['rooms_number'])
 	baths_number = int(request.POST['baths_number'])
-
-	price = linear_model(
-		floor_number, 
-		year_construction, 
-		square_meters, 
-		rooms_number, 
-		baths_number
-		)
-
-	print(price)
 
 	house = Houses(
 		floor_number=floor_number, 
@@ -65,6 +55,7 @@ def updaterecord(request, id):
 	square_meters = request.POST['square_meters']
 	rooms_number = request.POST['rooms_number']
 	baths_number = request.POST['baths_number']
+
 	house = Houses.objects.get(id=id)
 	house.floor_number = floor_number
 	house.year_construction = year_construction
@@ -73,3 +64,31 @@ def updaterecord(request, id):
 	house.baths_number = baths_number
 	house.save()
 	return HttpResponseRedirect(reverse('index'))
+
+def predictions(request, id):
+  myHouse = Houses.objects.get(id=id)
+  template = loader.get_template('predictions.html')
+  context = {
+    'myHouse': myHouse,
+  }
+  return HttpResponse(template.render(context, request))
+
+
+def updatepredictions(request, id):
+	print("paso por aqui")
+	floor_number = float(request.POST['floor_number'])
+	year_construction = float(request.POST['year_construction'])
+	square_meters = float(request.POST['square_meters'])
+	rooms_number = float(request.POST['rooms_number'])
+	baths_number = float(request.POST['baths_number'])
+
+	price = linear_model(floor_number, year_construction, square_meters, rooms_number, baths_number)
+	
+	house = Houses.objects.get(id=id)
+	Predictions.objects.filter(house=house).delete()
+
+	predicitions_model = Predictions(id=None, model_name="Simple Linear Model", price=price, house=house)
+	predicitions_model.save()	
+
+	print(price)
+	return HttpResponseRedirect(reverse("predictions", args=(id,)))

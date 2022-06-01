@@ -25,13 +25,15 @@ def addrecord(request):
 	square_meters = float(request.POST['square_meters'])
 	rooms_number = int(request.POST['rooms_number'])
 	baths_number = int(request.POST['baths_number'])
+	has_elevator = request.POST.get('has_elevator', False) == "on"
 
 	house = Houses(
 		floor_number=floor_number, 
 		year_construction=year_construction,
 		square_meters=square_meters,
 		rooms_number=rooms_number,
-		baths_number=baths_number
+		baths_number=baths_number,
+		has_elevator=has_elevator
 	)
 	house.save()
 	return HttpResponseRedirect(reverse('index'))
@@ -55,6 +57,7 @@ def updaterecord(request, id):
 	square_meters = request.POST['square_meters']
 	rooms_number = request.POST['rooms_number']
 	baths_number = request.POST['baths_number']
+	has_elevator = request.POST.get('has_elevator', False) == "on"
 
 	house = Houses.objects.get(id=id)
 	house.floor_number = floor_number
@@ -62,6 +65,7 @@ def updaterecord(request, id):
 	house.square_meters = square_meters
 	house.rooms_number = rooms_number
 	house.baths_number = baths_number
+	house.has_elevator = has_elevator
 	house.save()
 	return HttpResponseRedirect(reverse('index'))
 
@@ -80,6 +84,7 @@ def updatepredictions(request, id):
 	square_meters = float(request.POST['square_meters'])
 	rooms_number = float(request.POST['rooms_number'])
 	baths_number = float(request.POST['baths_number'])
+	has_elevator = boolean(request.POST['has_elevator'])
 
 	price = linear_model(floor_number, year_construction, square_meters, rooms_number, baths_number)
 	

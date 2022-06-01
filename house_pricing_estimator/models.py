@@ -8,6 +8,7 @@ class Houses(models.Model):
 	square_meters = models.FloatField()
 	rooms_number = models.IntegerField()
 	baths_number = models.IntegerField()
+	has_elevator = models.BooleanField(default=False)
 
 class Predictions(models.Model):
     model_name = models.CharField(max_length=100)

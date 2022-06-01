@@ -14,6 +14,7 @@
 	<th>squares meters</th>
 	<th>number of rooms</th>
 	<th>number of baths</th>
+	<th>elevator</th>
 </tr>
 
 <tr>
@@ -22,6 +23,7 @@
 	<td><input name="square_meters" type="float" value="{{ myHouse.square_meters }}" required></td>
 	<td><input name="rooms_number" type="number" value="{{ myHouse.rooms_number }}" required></td>
 	<td><input name="baths_number" type="number" value="{{ myHouse.baths_number }}" required></td>
+	<td><input name="has_elevator" type="checkbox" {% if myHouse.has_elevator %} checked {% else %} {% endif %} ></td>
 </tr>
 
 </table>

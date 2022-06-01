@@ -75,7 +75,6 @@ def predictions(request, id):
 
 
 def updatepredictions(request, id):
-	print("paso por aqui")
 	floor_number = float(request.POST['floor_number'])
 	year_construction = float(request.POST['year_construction'])
 	square_meters = float(request.POST['square_meters'])
@@ -90,5 +89,4 @@ def updatepredictions(request, id):
 	predicitions_model = Predictions(id=None, model_name="Simple Linear Model", price=price, house=house)
 	predicitions_model.save()	
 
-	print(price)
 	return HttpResponseRedirect(reverse("predictions", args=(id,)))

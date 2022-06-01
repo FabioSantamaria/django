@@ -41,10 +41,6 @@ INSTALLED_APPS = [
     #third party
  
     #own
-    #'store',
-    #'house_form',
-    #'house',
-    #'prueba',
     'house_pricing_estimator',
 ]
 

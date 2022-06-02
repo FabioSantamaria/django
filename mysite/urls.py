@@ -15,12 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
-#from prueba.views import contact_form_view, thanks_view
-#from house.views import house_form_view
-#from house_form.views import manage_articles
-#from store.views import BookListView
-
 from house_pricing_estimator import views
 
 urlpatterns = [
